@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Envio de Correos</title>
+</head>
+
+<body class="m-5">
+
+    <h2 class="text-center">Envio de Correos con PHPMailer</h2>
+
+
+    <div class="row">
+        <div class="card col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">Mi Formulario Con PHP 7.2</h5>
+                <form class="form" method="POST" id="formCorreo">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            placeholder="Ingresa tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo"
+                            placeholder="Ingresa tu correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario">Comentario</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="foto" name="foto"
+                            placeholder="Ingresa tu nombre">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div class="card col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">Mi Formulario Con PHP 5.3</h5>
+                <form class="form" method="POST" id="formCorreo5-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            placeholder="Ingresa tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo"
+                            placeholder="Ingresa tu correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario">Comentario</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="foto" name="foto"
+                            placeholder="Ingresa tu nombre">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById("formCorreo").addEventListener('submit',(e)=>{
+            e.preventDefault()
+            let data=document.getElementById("formCorreo")
+            data=new FormData(data)
+            fetch('includes/sendmail.php',{
+                method:"POST",
+                body:data
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                if(data.response=="ok")
+                {
+                    Swal.fire(
+                    'Correcto!',
+                    data.message,
+                    'success'
+                    )
+                }
+                else
+                {
+                    Swal.fire(
+                    'Error!',
+                    data.message,
+                    'error'
+                    )
+                }
+            })
+        })
+        document.getElementById("formCorreo5-3").addEventListener('submit',(e)=>{
+            e.preventDefault()
+            let data=document.getElementById("formCorreo5-3")
+            data=new FormData(data)
+            fetch('includes5-3/sendmail.php',{
+                method:"POST",
+                body:data
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                if(data.response=="ok")
+                {
+                    Swal.fire(
+                    'Correcto!',
+                    data.message,
+                    'success'
+                    )
+                }
+                else
+                {
+                    Swal.fire(
+                    'Error!',
+                    data.message,
+                    'error'
+                    )
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
+
