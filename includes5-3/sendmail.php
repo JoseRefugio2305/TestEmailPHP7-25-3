@@ -7,7 +7,7 @@
         require 'PHPMailer/src/Exception.php';
         require 'PHPMailer/src/PHPMailer.php';
         require 'PHPMailer/src/SMTP.php';
-
+        include "credenciales.php";
         include "conn.php";
 
         echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n"; 
@@ -40,10 +40,10 @@
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
         $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-        $mail->Username = '**********'; //Correo de donde enviaremos los correos
-        $mail->Password = '*****'; // Password de la cuenta de envío
+        $mail->Username = $correoserv; //Correo de donde enviaremos los correos
+        $mail->Password = $passserv; // Password de la cuenta de envío
         
-        $mail->setFrom('**********', 'nombre');
+        $mail->setFrom($correoserv, 'nombre');
     
         $mail->addAddress($correo);
     
